@@ -20,13 +20,20 @@ export default function Model(props) {
   const texture_3 = useKTX2Texture("/textures/Scene_1_Winter_3.webp", false);
   const texture_4 = useKTX2Texture("/textures/Scene_1_Winter_4.webp", false);
 
-  const deerHeadRef = useRef();
+  const fire1Ref = useRef();
+  const fire2Ref = useRef();
+  const fire3Ref = useRef();
 
-  useFrame((state) => {
-    if (!deerHeadRef) return;
+  useFrame((state, delta) => {
     const time = state.clock.elapsedTime;
 
-    // deerHeadRef.current.rotation.z = 0.2 * Math.sin(time);
+    const snapIndex = Math.floor(state.clock.elapsedTime * 2.2);
+    const randomAngle =
+      (Math.sin(snapIndex * 127.1) * 43758.5453) % (Math.PI * 2);
+
+    if (fire1Ref.current) fire1Ref.current.rotation.y = -randomAngle;
+    if (fire3Ref.current) fire3Ref.current.rotation.y = -randomAngle;
+    if (fire2Ref.current) fire2Ref.current.rotation.y = randomAngle;
   });
 
   return (
@@ -34,24 +41,28 @@ export default function Model(props) {
       <mesh
         geometry={nodes.Scene_1_Winter_1_Baked.geometry}
         material={texture_1}
+        position={nodes.Scene_1_Winter_1_Baked.position}
       />
       <mesh
         geometry={nodes.Scene_1_Winter_2_Baked.geometry}
         material={texture_2}
+        position={nodes.Scene_1_Winter_2_Baked.position}
       />
       <mesh
         geometry={nodes.Scene_1_Winter_3_Player.geometry}
         material={texture_3}
+        position={nodes.Scene_1_Winter_3_Player.position}
       />
       <mesh
         geometry={nodes.Scene_1_Winter_3_Bird_Wing.geometry}
         material={texture_3}
+        position={nodes.Scene_1_Winter_3_Bird_Wing.position}
       />
       <mesh
         geometry={nodes.Scene_1_Winter_3_Bird_Tail.geometry}
         material={texture_3}
+        position={nodes.Scene_1_Winter_3_Bird_Tail.position}
       />
-
       <AnimateMesh
         position={nodes.Scene_1_Winter_3_Deer_Head.position}
         axis={"z"}
@@ -65,29 +76,39 @@ export default function Model(props) {
       </AnimateMesh>
 
       <mesh
+        ref={fire2Ref}
         geometry={nodes.Scene_1_Winter_3_Fire_Inner_Most.geometry}
         material={texture_3}
+        position={nodes.Scene_1_Winter_3_Fire_Inner_Most.position}
       />
       <mesh
+        ref={fire1Ref}
         geometry={nodes.Scene_1_Winter_3_Fire_Center.geometry}
         material={texture_3}
+        position={nodes.Scene_1_Winter_3_Fire_Center.position}
       />
       <mesh
+        ref={fire3Ref}
         geometry={nodes.Scene_1_Winter_3_Fire_Outer.geometry}
         material={texture_3}
+        position={nodes.Scene_1_Winter_3_Fire_Outer.position}
       />
       <mesh
         geometry={nodes.Scene_1_Winter_3_Bird_Baked.geometry}
         material={texture_3}
+        position={nodes.Scene_1_Winter_3_Bird_Baked.position}
       />
       {/* <mesh
         geometry={nodes.Scene_1_Winter_3_Chat_Box_Scene_1_Winter_3.geometry}
         material={texture_3}
+        position={nodes.Scene_1_Winter_3_Chat_Box_Scene_1_Winter_3.position}
       /> */}
+
       <AnimateMesh axis={"z"} amplitude={0.01}>
         <mesh
           geometry={nodes.Scene_1_Winter_3_Note_1.geometry}
           material={texture_3}
+          position={nodes.Scene_1_Winter_3_Note_1.position}
         />
       </AnimateMesh>
 
@@ -95,42 +116,84 @@ export default function Model(props) {
         <mesh
           geometry={nodes.Scene_1_Winter_3_Note_2.geometry}
           material={texture_3}
+          position={nodes.Scene_1_Winter_3_Note_2.position}
         />
       </AnimateMesh>
+
       <AnimateMesh axis={"z"} offset={0.3} amplitude={0.011} speed={0.99}>
         <mesh
           geometry={nodes.Scene_1_Winter_3_Note_3.geometry}
           material={texture_3}
+          position={nodes.Scene_1_Winter_3_Note_3.position}
         />
       </AnimateMesh>
-      {/* 
-      <mesh
+
+      {/* <mesh
         geometry={nodes.Scene_1_Winter_3_Hello_Text.geometry}
         material={texture_3}
+        position={nodes.Scene_1_Winter_3_Hello_Text.position}
       />
       <mesh
         geometry={nodes.Scene_1_Winter_3_Thanks_Baked.geometry}
         material={texture_3}
+        position={nodes.Scene_1_Winter_3_Thanks_Baked.position}
       />
       <mesh
         geometry={nodes.Scene_1_Winter_3_Welcome_Baked.geometry}
         material={texture_3}
+        position={nodes.Scene_1_Winter_3_Welcome_Baked.position}
       /> */}
       <mesh
         geometry={nodes.Scene_1_Winter_3_Flame_3.geometry}
         material={texture_3}
+        position={nodes.Scene_1_Winter_3_Flame_3.position}
       />
       <mesh
         geometry={nodes.Scene_1_Winter_3_Flame_1.geometry}
         material={texture_3}
+        position={nodes.Scene_1_Winter_3_Flame_1.position}
       />
       <mesh
         geometry={nodes.Scene_1_Winter_3_Flame_2.geometry}
         material={texture_3}
+        position={nodes.Scene_1_Winter_3_Flame_2.position}
+      />
+      <mesh
+        geometry={nodes["Scene_1_Winter_3_snowman-arm"].geometry}
+        material={texture_3}
+        position={[10.549, 1.388, -7.092]}
+      />
+      <mesh
+        geometry={
+          nodes["Scene_1_Winter_3_Bird_Baked-snowman-arm-left"].geometry
+        }
+        material={texture_3}
+        position={[10.209, 1.429, -7.59]}
+      />
+      <mesh
+        geometry={nodes.Scene_1_Winter_3_Bird_actual.geometry}
+        material={texture_3}
+        position={nodes.Scene_1_Winter_3_Bird_actual.position}
+      />
+      <mesh
+        geometry={nodes.Scene_1_Winter_3_Bird_Mail_box_stick.geometry}
+        material={texture_3}
+        position={nodes.Scene_1_Winter_3_Bird_Mail_box_stick.position}
+      />
+      <mesh
+        geometry={nodes.Scene_1_Winter_3_Bird_mail_box_red.geometry}
+        material={texture_3}
+        position={nodes.Scene_1_Winter_3_Bird_mail_box_red.position}
+      />
+      <mesh
+        geometry={nodes.Scene_1_Winter_3_Bird_Baked_mailbox.geometry}
+        material={texture_3}
+        position={nodes.Scene_1_Winter_3_Bird_Baked_mailbox.position}
       />
       <mesh
         geometry={nodes.Scene_1_Winter_4_Baked.geometry}
         material={texture_4}
+        position={nodes.Scene_1_Winter_4_Baked.position}
       />
     </group>
   );

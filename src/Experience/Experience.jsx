@@ -12,6 +12,7 @@ import gsap from "gsap";
 import { useRef } from "react";
 import { useCurveProgressStore } from "../store/useCurveProgressStore";
 import { useGSAP } from "@gsap/react";
+import { useExperienceStore } from "../store/useExperienceStore";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 extend(THREE);
@@ -20,8 +21,22 @@ const Experience = () => {
   const setScrollProgress = useCurveProgressStore(
     (state) => state.setScrollProgress,
   );
+  const isExperienceReady = useExperienceStore(
+    (state) => state.isExperienceReady,
+  );
 
   const [lenis, setLenis] = useState(null);
+
+  useEffect(() => {
+    const lenisInstance = lenis?.lenis;
+    if (!lenisInstance) return;
+
+    if (isExperienceReady) {
+      lenisInstance.start();
+    } else {
+      lenisInstance.stop();
+    }
+  }, [isExperienceReady, lenis]);
 
   useEffect(() => {
     const lenisInstance = lenis?.lenis;
@@ -43,7 +58,7 @@ const Experience = () => {
       lenisInstance.off("scroll", syncScroll);
       gsap.ticker.remove(update);
     };
-  }, [lenis]);
+  }, [lenis, isExperienceReady]);
 
   return (
     <>

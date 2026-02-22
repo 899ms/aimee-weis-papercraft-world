@@ -89,10 +89,13 @@
   border: none;
   color: rgb(230, 230, 230);
   font-size: 28px;
+  padding: 12px 24px;
 }
 
 .enter-button:hover {
   cursor: pointer;
+  border-radius: 12px;
+  border: 3px dashed white;
 }
 
 .loading-bar-container {

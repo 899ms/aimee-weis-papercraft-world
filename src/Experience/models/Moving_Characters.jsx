@@ -27,6 +27,9 @@ export default function Model(props) {
   const targetPosition = useRef(new THREE.Vector3(0, 0, 0));
   const targetLookAt = useRef(new THREE.Vector3(0, 0, 0));
   const upVector = useRef(new THREE.Vector3(0, 1, 0));
+  const previousScrollProgress = useRef(0);
+
+  // Consider refacotring at this point this just a bloated file XDDD
 
   const winterFrontCharacterRef = useRef();
   const winterSideCharacterRef = useRef();
@@ -44,7 +47,13 @@ export default function Model(props) {
   const summerWaveInnerWrapperRef = useRef();
   const fallFrontCharacterInnerWrapperRef = useRef();
 
-  const previousScrollProgress = useRef(0);
+  const winterLeftArmRef = useRef();
+  const winterRightArmRef = useRef();
+  const winterLeftFootRef = useRef();
+  const winterRightFootRef = useRef();
+
+  const springFrontWheelRef = useRef();
+  const springBackWheelRef = useRef();
 
   const offsets = {
     winterFrontCharacterRef: 0.0124,
@@ -134,7 +143,7 @@ export default function Model(props) {
     ref.current.lookAt(targetLookAt.current);
   };
 
-  useFrame(() => {
+  useFrame((state) => {
     const scrollProgress = useCurveProgressStore.getState().scrollProgress;
 
     moveObjectOrCharacter(
@@ -187,12 +196,51 @@ export default function Model(props) {
       scrollProgress,
     );
 
+    const { start, end } = progressMoveRanges.winter;
+    const isVisible = scrollProgress >= start && scrollProgress < end;
+
+    if (isVisible) {
+      const wave = scrollProgress * 100;
+
+      const armSwing = Math.sin(wave) * 0.7;
+      const footSwing = Math.sin(wave) * 0.7;
+
+      if (winterLeftArmRef.current) {
+        winterLeftArmRef.current.rotation.z =
+          nodes.Moving_Characters_Winter_left_arm.rotation.z + armSwing;
+      }
+      if (winterRightArmRef.current) {
+        winterRightArmRef.current.rotation.z =
+          nodes.Moving_Characters_Winter_right_arm.rotation.z - armSwing;
+      }
+      if (winterLeftFootRef.current) {
+        winterLeftFootRef.current.rotation.z =
+          nodes.Moving_Characters_Winter_left_foot.rotation.z + footSwing;
+      }
+      if (winterRightFootRef.current) {
+        winterRightFootRef.current.rotation.z =
+          nodes.Moving_Characters_Winter_right_foot.rotation.z - footSwing;
+      }
+    }
+
+    const wheelSpeed = 205;
+    if (springFrontWheelRef.current) {
+      springFrontWheelRef.current.rotation.z =
+        nodes.Moving_Characters_Spring_side_front_wheel.rotation.z +
+        scrollProgress * wheelSpeed;
+    }
+    if (springBackWheelRef.current) {
+      springBackWheelRef.current.rotation.z =
+        nodes.Moving_Characters_Spring_side_back_wheel.rotation.z +
+        scrollProgress * wheelSpeed;
+    }
+
     previousScrollProgress.current = scrollProgress;
   });
 
   return (
     <group {...props} dispose={null}>
-      <group ref={winterFrontCharacterRef}>
+      <group ref={winterFrontCharacterRef} visible={false}>
         <group ref={winterFrontCharacterInnerWrapperRef} position={[0, -5, 0]}>
           <AnimateMesh
             position={[0, 0, 0]}
@@ -261,26 +309,30 @@ export default function Model(props) {
                 axis: "y",
                 speed: 2,
                 amplitude: 0.05,
-                base: 0.23,
+                base: 0,
               },
             ]}
           >
             <mesh
+              ref={winterLeftArmRef}
               geometry={nodes.Moving_Characters_Winter_left_arm.geometry}
               material={texture_1}
               position={nodes.Moving_Characters_Winter_left_arm.position}
             />
             <mesh
+              ref={winterRightArmRef}
               geometry={nodes.Moving_Characters_Winter_right_arm.geometry}
               material={texture_1}
               position={nodes.Moving_Characters_Winter_right_arm.position}
             />
             <mesh
+              ref={winterLeftFootRef}
               geometry={nodes.Moving_Characters_Winter_left_foot.geometry}
               material={texture_1}
               position={nodes.Moving_Characters_Winter_left_foot.position}
             />
             <mesh
+              ref={winterRightFootRef}
               geometry={nodes.Moving_Characters_Winter_right_foot.geometry}
               material={texture_1}
               position={nodes.Moving_Characters_Winter_right_foot.position}
@@ -294,7 +346,7 @@ export default function Model(props) {
         </group>
       </group>
 
-      <group ref={springFrontCharacterRef}>
+      <group ref={springFrontCharacterRef} visible={false}>
         <AnimateMesh
           position={[0, 0, 0]}
           animations={[
@@ -344,6 +396,7 @@ export default function Model(props) {
               scale={nodes.Moving_Characters_Spring_side.scale}
             />
             <mesh
+              ref={springBackWheelRef}
               geometry={nodes.Moving_Characters_Spring_side_back_wheel.geometry}
               material={texture_1}
               position={nodes.Moving_Characters_Spring_side_back_wheel.position}
@@ -351,6 +404,7 @@ export default function Model(props) {
               scale={nodes.Moving_Characters_Spring_side_back_wheel.scale}
             />
             <mesh
+              ref={springFrontWheelRef}
               geometry={
                 nodes.Moving_Characters_Spring_side_front_wheel.geometry
               }

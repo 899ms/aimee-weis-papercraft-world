@@ -3,12 +3,16 @@ import { useProgress } from "@react-three/drei";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import "./LoadingScreen.css";
+import { useExperienceStore } from "../../store/useExperienceStore";
 
 const LoadingScreen = () => {
   const { progress, active } = useProgress();
   const [maxProgress, setMaxProgress] = useState(0);
   const [revealed, setRevealed] = useState(false);
   const [gone, setGone] = useState(false);
+  const setIsExperienceReady = useExperienceStore(
+    (state) => state.setIsExperienceReady,
+  );
 
   const tlRef = useRef(null);
   const trRef = useRef(null);
@@ -18,7 +22,7 @@ const LoadingScreen = () => {
 
   useEffect(() => {
     if (active && progress === 100) return;
-    if (progress > maxProgress) setMaxProgress(progress);
+    setMaxProgress((prev) => (progress > prev ? progress : prev));
   }, [progress, active]);
 
   useGSAP(() => {
@@ -28,6 +32,9 @@ const LoadingScreen = () => {
       opacity: 0,
       duration: 0.3,
       ease: "power1.out",
+      onStart: () => {
+        setIsExperienceReady(true);
+      },
     });
 
     gsap.to(tlRef.current, {
@@ -53,7 +60,9 @@ const LoadingScreen = () => {
       right: "-100%",
       duration: 1,
       ease: "power2.inOut",
-      onComplete: () => setGone(true),
+      onComplete: () => {
+        setGone(true);
+      },
     });
   }, [revealed]);
 
@@ -82,6 +91,24 @@ const LoadingScreen = () => {
               />
             </div>
             <h1 className="title">Aimee Wei's PaperCraft World</h1>
+
+            <a
+              href="https://github.com/andrewwoan/mr-pandas-psychologically-safe-portfolio"
+              className="credits-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                position: "absolute",
+                left: "50%",
+                bottom: "15%",
+                transform: "translate(-50%, -50%)",
+                fontSize: "14px",
+                color: "rgb(255, 255, 255)",
+                textDecoration: "underline",
+              }}
+            >
+              See full list of credits here!!
+            </a>
           </>
         )}
 
