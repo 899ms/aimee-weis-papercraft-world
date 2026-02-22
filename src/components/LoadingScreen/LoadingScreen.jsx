@@ -156,7 +156,7 @@ const LoadingScreen = () => {
             />
 
             <a
-              href="https://github.com/andrewwoan/mr-pandas-psychologically-safe-portfolio"
+              href="https://github.com/andrewwoan/aimee-weis-papercraft-world"
               className="credits-link"
               target="_blank"
               rel="noopener noreferrer"
