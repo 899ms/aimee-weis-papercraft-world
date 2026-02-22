@@ -16,7 +16,8 @@ This repo contains code of Aimee's Papercraft Portfolio for a Codrops article an
 
 # Extra info
 
--
+- I had to remove the materials from the Blender files as I do not have a commericial license to distribute them unforunately.
+- See list of helpful scripts [here](https://docs.google.com/document/d/1Y6I7UjYl_gPlAMi2BdYp30Hzon56Zq16EuV35mpX5SE/edit?usp=sharing).
 
 # Areas of improvement / things to do
 
