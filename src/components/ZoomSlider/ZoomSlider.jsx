@@ -11,7 +11,6 @@ const ZoomSlider = () => {
 
   return (
     <div className="zoom-slider-wrapper">
-      {/* Left SVG — zoom out */}
       <div className="zoom-icon">
         <svg
           xmlns="http://www.w3.org/2000/svg"
