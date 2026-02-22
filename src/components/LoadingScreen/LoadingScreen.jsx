@@ -196,7 +196,7 @@ const LoadingScreen = () => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            Enter
+            Enter!
           </button>
         )}
       </div>
