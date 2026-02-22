@@ -15,6 +15,7 @@ This repo contains code of Aimee's Papercraft Portfolio for a Codrops article an
 - [Bilal Show Inspiration](https://bilal.show/)
 - [Dragon is dragonair From Pokemon](https://www.pokemon.com/us/pokedex/dragonair)
 - [Slime is from Genshin Impact](https://genshin-impact.fandom.com/wiki/Hydro_Slime)
+- [Guoba is from Genshin Impact](https://wiki.hoyolab.com/pc/genshin/entry/2552?lang=en-us)
 - [Star is from Mario](https://www.mariowiki.com/Super_Star)
 
 # Extra info
