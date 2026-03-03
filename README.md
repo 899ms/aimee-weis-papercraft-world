@@ -1,4 +1,4 @@
-# 📄 Aimee Wei's Papercraft Portfolio World ✂️
+# 📄 Aimee Wei's Award-Winning Papercraft Portfolio World ✂️
 
 **[Live site](https://aimees-papercraft-world.com/)** | **[Article - Coming Soon]()** | **[Tutorial](https://youtu.be/AD01pTr3gvw)**
 
@@ -27,6 +27,7 @@ This repo contains code of Aimee's Papercraft Portfolio for a Codrops article an
 
 # Extra info
 
+- Won [FWA of the day](https://thefwa.com/cases/aimees-papercraft-world)!
 - I had to remove the materials from the Blender files as I do not have a commericial license to distribute them unforunately, but you can follow along if you want to use my assets! Although I do highly recommend you apply what you know and create your own scene!
 - This is a pretty simple website, if you're a vibe coder, using an AI could do all the coding for you if you wanted to, the video is mainly for the more niche areas I recently discovered AI could help with my workflow.
 - See list of helpful scripts [here](https://docs.google.com/document/d/1Y6I7UjYl_gPlAMi2BdYp30Hzon56Zq16EuV35mpX5SE/edit?usp=sharing).
