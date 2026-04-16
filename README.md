@@ -15,6 +15,7 @@ This repo contains code of Aimee's Papercraft Portfolio for a Codrops article an
 - [Xianyao Wei's UI Design](https://github.com/wehwayne2/lucys-bedroom-interface)
 - [Joshua's World Inspiration](https://www.awwwards.com/sites/joshuas-world)
 - [Bilal Show Inspiration](https://bilal.show/)
+- [Cabin smoke Inspiration](https://www.pinterest.com/pin/521502831860325373/)
 - [Dragon is dragonair From Pokemon](https://www.pokemon.com/us/pokedex/dragonair)
 - [Slime is from Genshin Impact](https://genshin-impact.fandom.com/wiki/Hydro_Slime)
 - [Guoba is from Genshin Impact](https://wiki.hoyolab.com/pc/genshin/entry/2552?lang=en-us)
